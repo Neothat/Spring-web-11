@@ -1,19 +1,13 @@
 package com.geekbrains.spring.web.core.integrations;
 
 import com.geekbrains.spring.web.api.carts.CartDto;
-import com.geekbrains.spring.web.api.core.ProductDto;
-import com.geekbrains.spring.web.api.exceptions.AppError;
 import com.geekbrains.spring.web.api.exceptions.CartServiceAppError;
 import com.geekbrains.spring.web.core.exceptions.CartServiceIntegrationException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
-
-import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
