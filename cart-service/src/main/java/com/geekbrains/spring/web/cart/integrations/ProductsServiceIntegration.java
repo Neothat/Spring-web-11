@@ -16,15 +16,18 @@ public class ProductsServiceIntegration {
 
     private final WebClient coreServiceWebClient;
 
-    public Optional<ProductDto> findById(Long id) {
+    public ProductDto findById(Long id) {
         return coreServiceWebClient.get()
-                .uri("/api/v1/products/" + id)
+                .uri("/api/v1/products/" + id.toString())
                 .retrieve()
-                .onStatus(HttpStatus::is4xxClientError, clientResponse ->
-                        Mono.error(new ProductServiceIntegrationException("Сервис продуктов не доступен")))
-                .onStatus(HttpStatus::is5xxServerError, clientResponse ->
-                        Mono.error(new ProductServiceIntegrationException("Сервис продуктов сломался")))
-                .bodyToMono(Optional.class)
+//                Если использовать onStatus, то будем падать с:
+//                java.lang.NoSuchMethodException: org.springframework.web.reactive.function.client.WebClient$UriSpec.uri(java.lang.String,java.lang.Object)
+
+//                .onStatus(HttpStatus::is4xxClientError, clientResponse ->
+//                        Mono.error(new ProductServiceIntegrationException("Сервис продуктов не доступен")))
+//                .onStatus(HttpStatus::is5xxServerError, clientResponse ->
+//                        Mono.error(new ProductServiceIntegrationException("Сервис продуктов сломался")))
+                .bodyToMono(ProductDto.class)
                 .block();
     }
 }
