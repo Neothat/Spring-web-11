@@ -39,7 +39,7 @@ public class CartService {
     }
 
     public void addToCart(String cartKey, Long productId) {
-        ProductDto productDto = productsServiceIntegration.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Невозможно добавить продукт в корзину. Продукт не найдет, id: " + productId));
+        ProductDto productDto = productsServiceIntegration.findById(productId);
         execute(cartKey, c -> {
             c.add(productDto);
         });

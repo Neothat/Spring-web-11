@@ -67,6 +67,15 @@ public class ProductsController {
         return productConverter.entityToDto(product);
     }
 
+    @Operation(
+            summary = "Запрос на сохранение нового продукта",
+            responses = {
+                    @ApiResponse(
+                            description = "Успешный ответ", responseCode = "200",
+                            content = @Content(schema = @Schema(implementation = ProductDto.class))
+                    )
+            }
+    )
     @PostMapping
     public ProductDto saveNewProduct(@RequestBody ProductDto productDto) {
         productValidator.validate(productDto);
@@ -75,6 +84,15 @@ public class ProductsController {
         return productConverter.entityToDto(product);
     }
 
+    @Operation(
+            summary = "Запрос на обновление продукта",
+            responses = {
+                    @ApiResponse(
+                            description = "Успешный ответ", responseCode = "200",
+                            content = @Content(schema = @Schema(implementation = ProductDto.class))
+                    )
+            }
+    )
     @PutMapping
     public ProductDto updateProduct(@RequestBody ProductDto productDto) {
         productValidator.validate(productDto);
@@ -82,6 +100,14 @@ public class ProductsController {
         return productConverter.entityToDto(product);
     }
 
+    @Operation(
+            summary = "Запрос на удаление продукта по id",
+            responses = {
+                    @ApiResponse(
+                            description = "Успешный ответ", responseCode = "200"
+                    )
+            }
+    )
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id) {
         productsService.deleteById(id);
